@@ -1,0 +1,28 @@
+# inkbottle-blog
+
+## Tree
+- .github/   
+    - workflows/deploy.yml   # /docs/上云，用`github-pages-action`读取   
+- cmd/   
+    - generator/ main.go  # 入口   
+    - server/ main.go     # 本地预览   
+- conf/ config.go         # 路径常量   
+- internal/   
+    - io.go      # 读写   
+    - parser.go  # md-->html   
+    - build.go   # 遍历docs.套模板生成posts   
+- posts/ #.md   
+- web/   
+    - static/
+        - css   
+        - js   
+        - img/ logo.svg   
+    - templates/    
+        - feed.xml    # Rss订阅    
+        - index.html    
+        - layout.html    
+        - post.html    
+- .gitignore   # 不希望git读取的东西      
+- Makefile     # 快捷预览，构建，发布小脚本     
+- go.mod       # `go mod init "项目名"`产物     
+- go.sum       # `go get github.com/"别人项目名"`产物     
