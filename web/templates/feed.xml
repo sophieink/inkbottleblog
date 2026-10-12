@@ -1,0 +1,20 @@
+{{define "feed.xml"}}<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>{{.SiteTitle}}</title>
+    <link>{{.SiteURL}}</link>
+    <description>{{.SiteTitle}}</description>
+    <language>zh-cn</language>
+    <atom:link href="{{.SiteURL}}feed.xml" rel="self" type="application/rss+xml"/>
+    {{range .Posts}}
+    <item>
+      <title>{{.Title}}</title>
+      <link>{{$.SiteURL}}{{.Slug}}.html</link>
+      <guid isPermaLink="true">{{$.SiteURL}}{{.Slug}}.html</guid>
+      <pubDate>{{.PubDate}}</pubDate>
+      <description><![CDATA[{{.Content}}]]></description>
+    </item>
+    {{end}}
+  </channel>
+</rss>
+{{end}}

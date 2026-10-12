@@ -1,0 +1,7 @@
+{{define "content"}}
+<ul class="post-list">
+  {{range .Posts}}
+  <li><a href="./{{.Slug}}.html">{{.Title}}</a></li>
+  {{end}}
+</ul>
+{{end}}

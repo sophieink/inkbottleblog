@@ -1,0 +1,10 @@
+github.com/alecthomas/chroma/v3 v3.0.0-alpha.5 h1:Ins5lDliEp34swfd+nh2eESjBA4MlrHrmi6Uyxsl/9E=
+github.com/alecthomas/chroma/v3 v3.0.0-alpha.5/go.mod h1:CjTPYmVdv0LiMgid2gCJeE30AgchDKbdsW7R3xs9mHI=
+github.com/dlclark/regexp2/v2 v2.2.2 h1:MYWvNYw8okuqNhwTYO587EZMiDruVa2vhV6fsGpfya0=
+github.com/dlclark/regexp2/v2 v2.2.2/go.mod h1:avUrQvPaLz2DrFNHJF0taWAFFX2C1GMSSoeiqFjcBmU=
+github.com/yuin/goldmark v1.8.6 h1:d0VcaP1sx9GkFVkoW+KtggpGi2KZ965i14b0+bDQST4=
+github.com/yuin/goldmark v1.8.6/go.mod h1:ip/1k0VRfGynBgxOz0yCqHrbZXhcjxyuS66Brc7iBKg=
+github.com/yuin/goldmark-highlighting/v3 v3.1.0 h1:RZiuWoxLTtGURRHbDlBVBx0MwLBZiO69y0kx1xWXhW4=
+github.com/yuin/goldmark-highlighting/v3 v3.1.0/go.mod h1:/46uezJvQdoDBRi+tDflDRTp6z7YmvMuiJ27jGSUBBY=
+github.com/yuin/goldmark/v2 v2.0.0 h1:P6JP1Px30eqo339He8dDFE8D0BSM21eQcbozLWH+E6g=
+github.com/yuin/goldmark/v2 v2.0.0/go.mod h1:G6M4/qOFtfn01/o14BU1UR2Lo5N3S9Qo7xCuz/sHjGQ=

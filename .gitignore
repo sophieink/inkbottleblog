@@ -1,0 +1,14 @@
+/bin/
+/docs/
+*.exe
+*.dll
+*.so
+*.test
+*.out
+
+.DS_Store
+Thumbs.db
+
+.idea/
+*.swp
+*.log
