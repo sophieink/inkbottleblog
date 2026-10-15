@@ -1,6 +1,9 @@
+{{define "title"}}{{.Post.Title}}{{end}}
 {{define "content"}}
 <article>
   <h1>{{.Post.Title}}</h1>
   {{.Post.Content}}
 </article>
 {{end}}
+{{define "scripts"}}{{end}}
+{{template "layout" .}}

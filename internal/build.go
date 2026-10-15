@@ -37,36 +37,12 @@ func Build() error {
 		posts = append(posts, p)
 	}
 
-	// 排序==[date:: YYYY-MM-DD] 最新post在前
+	// 排序：最新在前
 	sort.Slice(posts, func(i, j int) bool {
-		return posts[i].Date > posts[j].Date //降序，最新前置
+		return posts[i].Date > posts[j].Date
 	})
 
-	// 2. 两组html模板：layout+index / layout+post
-	// 组 1：layout + index
-  indexTpl, err := htmlTpl.ParseFiles(
-	  filepath.Join(conf.TemplateDir, "layout.html"),
-	  filepath.Join(conf.TemplateDir, "index.html"),   // ← 必须一起
-  )
-
-  // 组 2：layout + post
-  postTpl, err := htmlTpl.ParseFiles(
-	  filepath.Join(conf.TemplateDir, "layout.html"),
-	  filepath.Join(conf.TemplateDir, "post.html"),    // ← 必须一起
-  )
-
-	// 3. 渲染每篇（用 postTpl）
-	for _, p := range posts {
-		data := struct {
-			Title string
-			Post  *Post
-		}{Title: p.Title, Post: p}
-		if err := render(postTpl, "layout", p.Slug+".html", data); err != nil {
-			return err
-		}
-	}
-
-	// 4. 渲染首页（排除 about）
+	// 排除 about 的列表（首页用）
 	var listed []*Post
 	for _, p := range posts {
 		if p.Slug == "about" {
@@ -74,15 +50,46 @@ func Build() error {
 		}
 		listed = append(listed, p)
 	}
+
+	// 2. 渲染首页（独立解析 index 集合）
+	indexTpl, err := htmlTpl.ParseFiles(
+		filepath.Join(conf.TemplateDir, "base.html"),
+		filepath.Join(conf.TemplateDir, "partials", "header.html"),
+		filepath.Join(conf.TemplateDir, "partials", "footer.html"),
+		filepath.Join(conf.TemplateDir, "index.html"),
+	)
+	if err != nil {
+		return err
+	}
 	data := struct {
 		Title string
 		Posts []*Post
 	}{Title: "Blog", Posts: listed}
-	if err := render(indexTpl, "layout", "index.html", data); err != nil {
+	if err := render(indexTpl, "index.html", "index.html", data); err != nil {
 		return err
 	}
 
-	// 渲染feed.xml ( use text/template )
+	// 3. 渲染每篇文章（独立解析 post 集合）
+	postTpl, err := htmlTpl.ParseFiles(
+		filepath.Join(conf.TemplateDir, "base.html"),
+		filepath.Join(conf.TemplateDir, "partials", "header.html"),
+		filepath.Join(conf.TemplateDir, "partials", "footer.html"),
+		filepath.Join(conf.TemplateDir, "post.html"),
+	)
+	if err != nil {
+		return err
+	}
+	for _, p := range posts {
+		pdata := struct {
+			Title string
+			Post  *Post
+		}{Title: p.Title, Post: p}
+		if err := render(postTpl, "post.html", p.Slug+".html", pdata); err != nil {
+			return err
+		}
+	}
+
+	// 4. 渲染 feed.xml（text/template，独立）
 	feedTpl, err := textTpl.ParseFiles(filepath.Join(conf.TemplateDir, "feed.xml"))
 	if err != nil {
 		return err
@@ -93,8 +100,8 @@ func Build() error {
 		Posts     []*Post
 	}{
 		SiteTitle: "Blog",
-		SiteURL: "https://sophieink.github.io/inkbottle-blog/index.html",
-		Posts: listed, // 复用index
+		SiteURL:   "https://sophieink.github.io/inkbottle-blog/index.html",
+		Posts:     listed,
 	}
 	var feedBuf bytes.Buffer
 	if err := feedTpl.ExecuteTemplate(&feedBuf, "feed.xml", feedData); err != nil {

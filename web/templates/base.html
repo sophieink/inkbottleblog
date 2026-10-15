@@ -4,19 +4,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{.Title}}</title>
+  <title>{{block "title" .}}Blog{{end}}</title>
   <link rel="stylesheet" href="./static/css/style.css">
   <link rel="alternate" type="application/rss+xml" title="RSS" href="./feed.xml">
   <link rel="icon" type="image/svg+xml" href="./static/img/logo.svg">
 </head>
 <body>
-  <header>
-    <a href="./index.html">Blog</a>
-    <a href="./about.html">About</a>
-  </header>
+  {{template "header" .}}
   <main>
-    {{template "content" .}}
+    {{block "content" .}}{{end}}
   </main>
-</body>
+  {{template "footer" .}}
+  {{block "scripts" .}}{{end}}
+  </body>
 </html>
 {{end}}
