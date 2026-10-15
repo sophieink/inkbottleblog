@@ -17,10 +17,13 @@
         - css   
         - js   
         - img/ logo.svg   
-    - templates/    
+    - templates/ 
+        - partials/
+          - footer.html
+          - header.html
+        - base.html   # layout
         - feed.xml    # Rss订阅    
         - index.html    
-        - layout.html    
         - post.html    
 - .gitignore   # 不希望git读取的东西      
 - Makefile     # 快捷预览，构建，发布小脚本     
