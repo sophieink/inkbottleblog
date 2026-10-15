@@ -1,4 +1,4 @@
-.PHONY: dev build deploy clean
+.PHONY: dev build dep clean
 
 # 本地预览：先构建，再起 server
 dev:
@@ -10,9 +10,10 @@ build:
 	go run ./cmd/generator
 
 # 一键发布
-deploy:
+# make dep commit="新功能"
+dep:
 	git add .
-	git commit -m "publish: $$(date +%Y-%m-%d)" || true
+	git commit -m "$(commit)" || true
 	git push
 
 # 清理产物
