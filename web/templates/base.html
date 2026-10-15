@@ -15,7 +15,9 @@
     {{block "content" .}}{{end}}
   </main>
   {{template "footer" .}}
-  {{block "scripts" .}}{{end}}
+  {{block "scripts" .}}
+  <script src="/static/js/main.js" defer></script>
+  {{end}}
   </body>
 </html>
 {{end}}
